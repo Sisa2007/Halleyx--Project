@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Core Instagram-Royal Blue-Violet Palette */
+  --ig-purple:    #833AB4;
+  --ig-pink:      #C13584;
+  --ig-orange:    #F77737;
+  --royal-blue:   #1A56DB;
+  --royal-violet: #7E3AF2;
+  --royal-indigo: #5145CD;
+  --royal-light:  #818CF8;
+  --accent-cyan:  #06B6D4;
+  --accent-teal:  #14B8A6;
+  --accent-rose:  #F43F5E;
+  --success:      #22C55E;
+  --warning:      #F59E0B;
+  --danger:       #EF4444;
+
+  /* IG Gradient */
+  --ig-gradient:  linear-gradient(135deg, #833AB4 0%, #C13584 30%, #E1306C 55%, #F77737 100%);
+  --royal-gradient: linear-gradient(135deg, #1A56DB 0%, #5145CD 50%, #7E3AF2 100%);
+  --card-gradient: linear-gradient(145deg, #1e1b4b 0%, #1e1b4b 100%);
+
+  /* Backgrounds */
+  --bg-base:      #0A0A14;
+  --bg-surface:   #0F0E1E;
+  --bg-card:      #13122A;
+  --bg-card2:     #181730;
+  --bg-elevated:  #1E1C3A;
+  --bg-hover:     #252348;
+
+  /* Borders */
+  --border-soft:  rgba(126,58,242,0.15);
+  --border-mid:   rgba(126,58,242,0.28);
+  --border-strong:rgba(126,58,242,0.50);
+  --border-ig:    rgba(225,48,108,0.25);
+
+  /* Text */
+  --text-primary:  #F1F0FF;
+  --text-secondary:#A5B4FC;
+  --text-muted:    #6366F1;
+  --text-dim:      #374151;
+
+  /* Glows */
+  --glow-violet: 0 0 24px rgba(126,58,242,0.45);
+  --glow-blue:   0 0 24px rgba(26,86,219,0.40);
+  --glow-ig:     0 0 24px rgba(193,53,132,0.40);
+
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  18px;
+  --radius-xl:  26px;
+  --radius-full:9999px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0; padding: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Ambient background layers */
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 45% at 10% 5%,  rgba(26,86,219,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 40% at 90% 95%, rgba(131,58,180,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 50% at 50% 50%, rgba(10,10,20,0.95) 0%, var(--bg-base) 100%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg-elevated); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--royal-violet); }
+
+::selection { background: rgba(126,58,242,0.3); color: #C4B5FD; }
+
+/* Keyframes */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-dot {
+  0%,100% { opacity: 0.5; transform: scale(1); }
+  50%     { opacity: 1;   transform: scale(1.3); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes ig-border {
+  0%   { border-image-source: var(--ig-gradient); }
+  100% { border-image-source: var(--royal-gradient); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* IG gradient text utility */
+.ig-text {
+  background: var(--ig-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.royal-text {
+  background: var(--royal-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card base */
+.hx-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.25s, box-shadow 0.25s;
+  position: relative; overflow: hidden;
+}
+.hx-card:hover {
+  border-color: var(--border-mid);
+  box-shadow: var(--glow-violet);
+}
+.hx-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(126,58,242,0.5), rgba(193,53,132,0.4), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.hx-card:hover::before { opacity: 1; }
+
+/* IG pill badge */
+.ig-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: var(--radius-full);
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.05em;
+  background: linear-gradient(135deg, rgba(131,58,180,0.18), rgba(247,119,55,0.12));
+  border: 1px solid rgba(193,53,132,0.25);
+  color: #F472B6;
+}
+
+/* Drag-drop ghost */
+.drag-ghost {
+  opacity: 0.4;
+  outline: 2px dashed var(--royal-violet);
+  border-radius: var(--radius-md);
+}
+.drop-target {
+  background: rgba(126,58,242,0.12) !important;
+  border: 2px dashed var(--royal-violet) !important;
+  border-radius: var(--radius-md);
+}
